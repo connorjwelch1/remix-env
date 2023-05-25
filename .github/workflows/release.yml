@@ -1,12 +1,18 @@
 name: Release
 on:
-  workflow_call:
+  push:
+    branches:
+      - main
     secrets:
       NPM_TOKEN:
         required: true
 
 jobs:
   release:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     name: Release
     runs-on: ubuntu-latest
     steps:
