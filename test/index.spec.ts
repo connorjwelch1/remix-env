@@ -1,13 +1,28 @@
-import { myPackage } from '../src';
+import { createRemixEnv } from '../src';
+import { z } from 'zod';
 
-describe('index', () => {
-  describe('myPackage', () => {
-    it('should return a string containing the message', () => {
-      const message = 'Hello';
+describe('createRemixEnv', () => {
+  describe('setEnv', () => {
+    it('should set parsed environment on server', () => {
+      const { setEnv, getServerEnvVar } = createRemixEnv({
+        schema: z.object({
+          apiUrl: z.string().url(),
+          secret: z.string(),
+        }),
+        clientExclude: ['secret'],
+      });
 
-      const result = myPackage(message);
+      process.env.apiUrl = 'https://www.someurl.com';
+      process.env.secret = 'TEST_SECRET';
 
-      expect(result).toMatch(message);
+      setEnv();
+
+      expect(global.ENV).toEqual({
+        apiUrl: 'https://www.someurl.com',
+        secret: 'TEST_SECRET',
+      });
+
+      expect(getServerEnvVar('secret')).toEqual('TEST_SECRET');
     });
   });
 });
