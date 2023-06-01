@@ -10,6 +10,11 @@ declare global {
 
 export type KeyArray<Base> = (keyof Base)[];
 
+export type EnvLoader<ClientEnv> = () => { env: ClientEnv };
+export type VarGetter<Env, Key extends keyof Env = keyof Env> = (
+  key: Key
+) => Env[Key];
+
 export interface CreateRemixEnvArgs<Env, ClientExclude extends KeyArray<Env>> {
   schema: z.ZodSchema<Env>;
   clientExclude?: ClientExclude;
@@ -22,8 +27,8 @@ export interface RemixEnv<
 > {
   getEnv: () => ServerEnv | ClientEnv;
   setEnv: () => void;
-  getServerEnvVar: (key: keyof ServerEnv) => ServerEnv[keyof ServerEnv];
-  getClientEnvVar: (key: keyof ClientEnv) => ClientEnv[keyof ClientEnv];
-  envLoader: () => { env: ClientEnv };
+  getServerEnvVar: VarGetter<ServerEnv>;
+  getClientEnvVar: VarGetter<ClientEnv>;
+  envLoader: EnvLoader<ClientEnv>;
   EnvironmentVars: () => JSX.Element;
 }

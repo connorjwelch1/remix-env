@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateRemixEnvArgs, KeyArray, RemixEnv } from './envTypes';
+import { CreateRemixEnvArgs, EnvLoader, KeyArray, RemixEnv } from './envTypes';
 import { useRouteLoaderData } from '@remix-run/react';
 
 export const createRemixEnv = <
@@ -47,7 +47,9 @@ export const createRemixEnv = <
       };
     },
     EnvironmentVars: () => {
-      const { env } = useRouteLoaderData('root') as { env: ClientEnv };
+      const { env } = useRouteLoaderData('root') as ReturnType<
+        EnvLoader<ClientEnv>
+      >;
       return (
         <script
           dangerouslySetInnerHTML={{

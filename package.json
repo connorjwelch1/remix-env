@@ -1,5 +1,5 @@
 {
-  "name": "remix-env",
+  "name": "remix-validated-env",
   "version": "0.0.0-development",
   "description": "A template for creating npm packages using TypeScript and VSCode",
   "main": "./lib/index.js",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/connorjwelch1/remix-env.git"
+    "url": "git+https://github.com/connorjwelch1/remix-validated-env.git"
   },
   "license": "MIT",
   "author": {
@@ -36,9 +36,9 @@
     "variables"
   ],
   "bugs": {
-    "url": "https://github.com/connorjwelch1/remix-env/issues"
+    "url": "https://github.com/connorjwelch1/remix-validated-env/issues"
   },
-  "homepage": "https://github.com/connorjwelch1/remix-env#readme",
+  "homepage": "https://github.com/connorjwelch1/remix-validated-env#readme",
   "devDependencies": {
     "@remix-run/react": "^1.16.1",
     "@ryansonshine/commitizen": "^4.2.8",
